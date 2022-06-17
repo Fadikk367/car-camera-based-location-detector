@@ -1,0 +1,44 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  padding: 20px;
+  background-color: rgb(119, 188, 102);
+}
+
+main {
+  flex: 1;
+  background-color: aqua;
+
+  display: flex;
+}
+
+footer {
+  padding: 20px;
+  background-color: rgb(119, 188, 102);
+}
+
+#input-section, #map-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#input-section {
+  background-color: rgb(241, 241, 241);
+}
+
+#map-section {
+  background-color: rgb(198, 222, 201);
+}
