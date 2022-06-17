@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from dominating_color import get_dominating_colors
+from plates.dominating_color import get_dominating_colors
 
 def hsv_to_color(hsv):
     h, s, v = hsv
