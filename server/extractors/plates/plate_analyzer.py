@@ -38,27 +38,29 @@ def predict_country_from_plate(plate):
     # print(dominating_left, dominating_whole, dominating_right)
 
     if dominating_whole == "YELLOW" and dominating_left == "BLUE":
-        return "NETHERLANDS"
+        return ["nl", "lb"] # Netherlands
     elif dominating_whole == "YELLOW":
-        return "GB"
+        return ["en", "he"] # UK/Israel
     elif dominating_whole == "WHITE" and dominating_left == "BLUE" and dominating_right == "RED":
-        return "BELGIUM"
+        return ["nl"] # Belgium
     elif dominating_whole == "WHITE" and dominating_left == "BLUE" and dominating_right == "YELLOW":
-        return "PORTUGAL"
+        return ["pt"] # Portugal
     elif dominating_whole == "WHITE" and dominating_left == "YELLOW":
-        return "UKRAINE"
+        return ["uk"] # Ukraine
     elif dominating_whole == "WHITE" and dominating_left == "RED":
-        return "ALBANIA"
+        return ["sq"] # Albania
     elif (dominating_whole == "WHITE" or dominating_whole == "BLACK") and dominating_left == "BLUE":
-        return "EUROPE"
+        return ["bg", "bs", "cs", "da", "de", "el", "en", "es", "et", 
+                "eu", "fi", "fr", "ga", "hr", "hu", "is", "lt", "lv",
+                "mk", "mt", "no", "pl", "rm", "sk", "sr", "sv"] # Europe
     elif dominating_left  == "BLUE"  and dominating_right == "BLUE":
-        return "ITALY"
+        return ["it"]
     elif dominating_whole == "GREEN" and dominating_left == "BLUE":
-        return "NORWAY"
+        return ["no"]
     elif (dominating_whole == "WHITE" or dominating_whole == "BLACK") and dominating_left == "WHITE" and dominating_right == "WHITE":
-        return "GB/RUSSIA"
+        return ["en", "ru"]
     else:
-        return "UNKNOWN"
+        return []
 
 if __name__ == '__main__':
     img = cv2.imread('plates/gb_front.png')
