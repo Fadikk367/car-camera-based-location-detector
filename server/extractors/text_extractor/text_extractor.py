@@ -20,7 +20,7 @@ def extract_text_from_image(image):
     boxes = non_max_suppression(np.array(boxes), confidences)
     #indices = cv2.dnn.NMSBoxesRotated(boxes, confidences, CONF_THRESHOLD, 0.4)
     text = recognize_text(orig, boxes, ratioW, ratioH)
-    return detect_language(text)
+    return detect_language(text), text
 
 def prepare_image(image):
     (origH, origW) = image.shape[:2]
@@ -116,19 +116,19 @@ def recognize_text(orig, boxes, ratioW, ratioH):
 
 def extract_text_easyocr(img, reader):
   text = reader.readtext(img, detail = 0)
-  return detect_language(text)
+  return detect_language(text), text
 
 def detect_language(text):
-  print(text)
+  #print(text)
   text_concat = ""
   for t in text:
     text_concat += t
   try:
     res = detect_langs(text_concat)
-    print(res, '\n')
+    #print(res, '\n')
     return res
   except Exception as e:
-    print(e)
+    #print(e)
     return ""
 
 def extract_all(img):
