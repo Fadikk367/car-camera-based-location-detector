@@ -38,27 +38,27 @@ def predict_country_from_plate(plate):
     # print(dominating_left, dominating_whole, dominating_right)
 
     if dominating_whole == "YELLOW" and dominating_left == "BLUE":
-        return ["nl", "lb"] # Netherlands
+        return ["nl", "lu"] # Netherlands
     elif dominating_whole == "YELLOW":
-        return ["en", "he"] # UK/Israel
+        return ["gb", "il", "co"] # UK/Israel
     elif dominating_whole == "WHITE" and dominating_left == "BLUE" and dominating_right == "RED":
-        return ["nl"] # Belgium
+        return ["be"] # Belgium
     elif dominating_whole == "WHITE" and dominating_left == "BLUE" and dominating_right == "YELLOW":
         return ["pt"] # Portugal
     elif dominating_whole == "WHITE" and dominating_left == "YELLOW":
-        return ["uk"] # Ukraine
+        return ["ua"] # Ukraine
     elif dominating_whole == "WHITE" and dominating_left == "RED":
-        return ["sq"] # Albania
+        return ["al"] # Albania
     elif (dominating_whole == "WHITE" or dominating_whole == "BLACK") and dominating_left == "BLUE":
-        return ["bg", "bs", "cs", "da", "de", "el", "en", "es", "et", 
-                "eu", "fi", "fr", "ga", "hr", "hu", "is", "lt", "lv",
-                "mk", "mt", "no", "pl", "rm", "sk", "sr", "sv"] # Europe
+        return ["at", "hr", "cy", "cz", "dk", "ee", "fi", "fr",
+                "de", "gr", "lv", "lt", "mk", "mt", "mc", "no",
+                "pl", "rs", "es", "se", "ad", "hu", "bg", "me"] # Europe
     elif dominating_left  == "BLUE"  and dominating_right == "BLUE":
         return ["it"]
     elif dominating_whole == "GREEN" and dominating_left == "BLUE":
         return ["no"]
     elif (dominating_whole == "WHITE" or dominating_whole == "BLACK") and dominating_left == "WHITE" and dominating_right == "WHITE":
-        return ["en", "ru"]
+        return ["gb", "ru", "us", "ar", "ec", "uy"]
     else:
         return []
 
