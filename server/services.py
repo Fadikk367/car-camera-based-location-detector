@@ -2,6 +2,7 @@ from flask import request
 from werkzeug.utils import secure_filename
 import os
 import cv2
+import requests
 from .extractors.plates.plate_analyzer import predict_country_from_plate
 from .extractors.plates.plate_detector import getPlates
 
@@ -50,6 +51,12 @@ def extract_data_from_text(image):
     for plate in getPlates(image):
         countries += predict_country_from_plate(plate)
     return countries
+
+def get_cities_from_string(string):
+    response = requests.get(f'https://graphhopper.com/api/1/geocode?q={string}&debug=true&key=9b5dc8fa-e030-418a-8011-17472be5b1bb').json()
+    hits = response['hits']
+    if len(hits) > 0:
+        return hits[0]['point']
 
 class WrongFileExtension(Exception):
     pass

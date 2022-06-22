@@ -34,6 +34,7 @@ def predict():
     # for country in extract_data_from_plates(image):
         # data['countries'][country] = weights['plate']
 
+    data['markers'].append(get_cities_from_string('bialystok'))
 
     # kierunek jazdy -> lista krajów
     # text extraktor -> lista krajów z prawdopodobieństwami i lista stringów
