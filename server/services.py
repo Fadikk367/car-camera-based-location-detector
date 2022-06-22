@@ -2,6 +2,8 @@ from flask import request
 from werkzeug.utils import secure_filename
 import os
 import cv2
+from .extractors.plates.plate_analyzer import predict_country_from_plate
+from .extractors.plates.plate_detector import getPlates
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'yaml'}
 
@@ -26,6 +28,12 @@ def get_file_from_request():
         return cv2.imread(path)
     else:
         raise WrongFileExtension()
-    
+
+def extract_data_from_plates(image):
+    countries = []
+    for plate in getPlates(image):
+        countries += predict_country_from_plate(plate)
+    return countries
+
 class WrongFileExtension(Exception):
     pass
