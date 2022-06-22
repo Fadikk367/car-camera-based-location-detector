@@ -36,18 +36,18 @@ def predict():
 
     for index, frame in enumerate(frames):
         print(f'Start extracting data from plates for frame {index + 1} of {number_of_frames}')
-        for country in extract_data_from_plates(frames[0]):
-            data['countries'][country] = weights['plate']
+        for country in extract_data_from_plates(frame):
+            data['countries'][country] += weights['plate']
 
         print(f'Start extracting data from route for frame {index + 1} of {number_of_frames}')
-        countries, probability = extract_data_from_route(frames[0])
+        countries, probability = extract_data_from_route(frame)
         for country in countries:
-            data['countries'][country] = weights['route'] * probability
+            data['countries'][country] += weights['route'] * probability
 
         print(f'Start extracting data from text for frame {index + 1} of {number_of_frames}')
-        countries_from_text, words = extract_data_from_text(frames[0])
+        countries_from_text, words = extract_data_from_text(frame)
         for country in countries_from_text.items():
-            data['countries'][country[0]] = weights['plate'] * country[1]
+            data['countries'][country[0]] += weights['plate'] * country[1]
 
         for word in words:
             print(f'Chcecking word: {word}')
