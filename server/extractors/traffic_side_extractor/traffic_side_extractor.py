@@ -90,7 +90,7 @@ def traffic_side_extractor(frame):
     more_likely_countries, probability = return_estimated_countries(count)
     
     # uncomment for testing
-    cv2.imshow("Test", image)
+    # cv2.imshow("Test", image)
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
