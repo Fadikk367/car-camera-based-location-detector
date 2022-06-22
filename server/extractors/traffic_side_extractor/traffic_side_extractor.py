@@ -26,9 +26,9 @@ def get_traffic_side_lists():
                 continue
             else:
                 if line[2] == 'YES':
-                    right_side_list.append(line[0])
+                    right_side_list.append(line[0].lower())
                 else:
-                    left_side_list.append(line[0])
+                    left_side_list.append(line[0].lower())
 
     return left_side_list, right_side_list
 
