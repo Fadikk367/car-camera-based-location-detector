@@ -98,6 +98,24 @@ footer {
   background-color: rgb(119, 188, 102);
 }
 
+#row {
+  margin-top: 20px;
+}
+
+#frames-input-label {
+  font-size: 1em;
+  padding-bottom: 8px;
+  margin-right: 10px;
+}
+
+#frames-input {
+  width: 80px;
+  padding: 5px;
+  font-size: 1.1em;
+  border-radius: 6px;
+  outline: none;
+}
+
 #video-input-label:hover {
   opacity: 0.9;
   cursor: pointer;

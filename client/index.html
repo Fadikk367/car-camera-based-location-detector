@@ -21,7 +21,7 @@
   <main>
     <section id="input-section">
       <form action="#">
-        <div id="video-drop-area">
+        <div id="inputs">
           <label for="video-input" id="video-input-label">
             <img src="./images/movie.png" class="icon">
             Click to Choose car camera recording
@@ -29,6 +29,12 @@
           <input type="file" id="video-input" name="video">
         </div>
         <video controls id="video-player">Not supproted</video>
+        <div id="row">
+          <label for="frames-input" id="frames-input-label">
+            Number of frames that will be taken from video:
+          </label>
+          <input type="number" id="frames-input" name="frames" value="4" min="1" max="10" required>
+        </div>
         <div id="control-buttons">
           <button id="upload-video-button" class="control-button" type="submit" disabled>
             <img src="./images/upload.png" class="icon">

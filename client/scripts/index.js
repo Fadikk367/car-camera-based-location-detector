@@ -1,4 +1,5 @@
 const videoInput = document.getElementById('video-input');
+const framesInput = document.getElementById('frames-input');
 const videoPlayer = document.getElementById('video-player');
 const clearVideoButton = document.getElementById('clear-video-button');
 const uploadVideoButton = document.getElementById('upload-video-button');
@@ -55,13 +56,21 @@ function handleVideoInputChange() {
 function handleFormSubmit(e) {
   e.preventDefault();
 
-  // fetch('www.google.com', {
-  //   method: 'POST',
-  //   body: document.forms[0].elements.video.files[0],
-  // });
-
   const file = videoInput.files[0];
   if (file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('frames', framesInput.value);
+  
+    fetch('http://localhost:5000', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log({data});
+    });
+  
     handleResponse(response);
   }
 }
