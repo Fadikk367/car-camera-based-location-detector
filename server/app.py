@@ -53,4 +53,6 @@ def predict():
             print(f'Chcecking word: {word}')
             data['markers'].append(get_cities_from_string(word))
 
+        data['markers'].append(get_cities_from_string('bialystok'))
+
     return {'result': data}, 200

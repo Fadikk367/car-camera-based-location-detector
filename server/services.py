@@ -71,7 +71,7 @@ def get_cities_from_string(string):
     response = requests.get(f'https://graphhopper.com/api/1/geocode?q={string}&debug=true&key=9b5dc8fa-e030-418a-8011-17472be5b1bb').json()
     hits = response['hits']
     if len(hits) > 0:
-        return hits[0]['point']
+        return {'point': hits[0]['point'], 'name': hits[0]['name']}
 
 class WrongFileExtension(Exception):
     pass
