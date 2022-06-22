@@ -1,6 +1,7 @@
 from flask import request
 from werkzeug.utils import secure_filename
 import os
+import cv2
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'yaml'}
 
@@ -20,7 +21,9 @@ def get_file_from_request():
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file.save(os.path.join('images', filename))
+        path = os.path.join('images', filename)
+        file.save(path)
+        return cv2.imread(path)
     else:
         raise WrongFileExtension()
     
