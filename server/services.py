@@ -6,6 +6,7 @@ import requests
 from .extractors.text_extractor.text_extractor import extract_all
 from .extractors.plates.plate_analyzer import predict_country_from_plate
 from .extractors.plates.plate_detector import getPlates
+from .extractors.traffic_side_extractor.traffic_side_extractor import traffic_side_extractor
 
 ALLOWED_EXTENSIONS = {'mp4'}
 
@@ -32,11 +33,16 @@ def get_file_from_request():
 def get_frames_from_video(video_path):
     reader = cv2.VideoCapture(video_path)
     is_next_frame, frame = reader.read()
-    frames = []
+    all_frames = []
+    i = 0
     while is_next_frame:
-        frames.append(frame)
+        i += 1
+        all_frames.append(frame)
         is_next_frame, frame = reader.read()
     reader.release()
+    div = i//int(request.form['frames']) + 1
+    frames = [frame for index, frame in enumerate(all_frames) if index%div == 0]
+    print(f'Result number of frames: {len(frames)}')
     return frames
 
 def extract_data_from_plates(image):
@@ -57,6 +63,9 @@ def extract_data_from_text(image):
             if len(word) > 3:
                 words.append(word)
     return countries, words
+
+def extract_data_from_route(image):
+    return traffic_side_extractor(image)
 
 def get_cities_from_string(string):
     response = requests.get(f'https://graphhopper.com/api/1/geocode?q={string}&debug=true&key=9b5dc8fa-e030-418a-8011-17472be5b1bb').json()
@@ -80,5 +89,6 @@ upload_form = '''
     <form method=post enctype=multipart/form-data>
       <input type=file name=file>
       <input type=submit value=Upload>
+      <input type=number name=frames>
     </form>
     '''

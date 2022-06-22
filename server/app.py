@@ -32,20 +32,25 @@ def predict():
         return {'message': 'Wrong file extension'}, 400
 
     frames = get_frames_from_video(video_path)
+    number_of_frames = len(frames)
 
-    print(f'start extracting data from plates')
-    # for country in extract_data_from_plates(frames[0]):
-        # data['countries'][country] = weights['plate']
+    for index, frame in enumerate(frames):
+        print(f'Start extracting data from plates for frame {index + 1} of {number_of_frames}')
+        for country in extract_data_from_plates(frames[0]):
+            data['countries'][country] = weights['plate']
 
-    print(f'start extracting data from text')
-    countries_from_text, words = extract_data_from_text(frames[0])
-    for country in countries_from_text.items():
-        data['countries'][country[0]] = weights['plate'] * country[1]
+        print(f'Start extracting data from route for frame {index + 1} of {number_of_frames}')
+        countries, probability = extract_data_from_route(frames[0])
+        for country in countries:
+            data['countries'][country] = weights['route'] * probability
 
-    for word in words:
-        print(f'word: ======== {word}')
-        # data['markers'].append(get_cities_from_string(word))
+        print(f'Start extracting data from text for frame {index + 1} of {number_of_frames}')
+        countries_from_text, words = extract_data_from_text(frames[0])
+        for country in countries_from_text.items():
+            data['countries'][country[0]] = weights['plate'] * country[1]
 
-    # zwracamy
+        for word in words:
+            print(f'Chcecking word: {word}')
+            data['markers'].append(get_cities_from_string(word))
 
     return {'result': data}, 200
