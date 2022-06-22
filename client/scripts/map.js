@@ -112,8 +112,10 @@ var mapState = {
     Object.keys(countryCodes).forEach((countryCode) => {
         const countryName = countryNamesByCodes[countryCode.toUpperCase()];
         if (countryName) {
-            console.log({countryName});
-            countours.push(countries[countryName]);
+            const contour = countries[countryName];
+            if (contour) {
+                countours.push(countries[countryName]);
+            }
         }
     });
 
