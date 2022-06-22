@@ -38,19 +38,16 @@ function style(feature) {
     };
 }
 
-var legend = L.control({position: 'bottomright'});
+const legend = L.control({position: 'bottomright'});
 
-legend.onAdd = function (map) {
+legend.onAdd = function () {
+    const div = L.DomUtil.create('div', 'info legend'),
+    grades = [0.0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
 
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0.0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9],
-        labels = [];
-
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
+    for (let i = grades.length - 1; i > 0; i--) {
         div.innerHTML +=
             '<i style="background:' + getColorByProbability(grades[i]) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            100*grades[i] + (grades[i - 1] ? ' &ndash; ' + 100*grades[i - 1] + ' %<br>' : ' &ndash; 0 %');
     }
 
     return div;

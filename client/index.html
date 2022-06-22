@@ -5,6 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Geodetector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
@@ -12,19 +15,29 @@
 </head>
 <body>
   <header>
+    <img src="./images/logo.png" id="logo" alt="Earth icon">
     <h1>Geodetector</h1>
   </header>
   <main>
     <section id="input-section">
       <form action="#">
         <div id="video-drop-area">
-          <label for="video-input" id="video-input-label">Choose car camera recording</label>
+          <label for="video-input" id="video-input-label">
+            <img src="./images/movie.png" class="icon">
+            Click to Choose car camera recording
+          </label>
           <input type="file" id="video-input" name="video">
         </div>
         <video controls id="video-player">Not supproted</video>
         <div id="control-buttons">
-          <button id="upload-video-button" class="control-button" type="submit" disabled>Upload to analysis</button>
-          <button id="clear-video-button" class="control-button" type="button">Clear</button>
+          <button id="upload-video-button" class="control-button" type="submit" disabled>
+            <img src="./images/upload.png" class="icon">
+            Upload to analysis
+          </button>
+          <button id="clear-video-button" class="control-button" type="button">
+            <img src="./images/delete.png" class="icon">
+            Clear
+          </button>
         </div>
       </form>
     </section>
@@ -32,7 +45,10 @@
       <div id="map"></div>
     </section>
   </main>
-  <footer>footer</footer>
+  <footer>
+    <p>Authors: Gabriel Naleźnik, Jan Zajda, Olga Kubiszyn, Wojciech Gomułka, Konrad Walas, Adrian Furman</p>
+    <p>AGH - WFiIS - AiPO - 2022</p>
+  </footer>
   <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin=""></script>
