@@ -35,6 +35,12 @@ def extract_data_from_plates(image):
         countries += predict_country_from_plate(plate)
     return countries
 
+def extract_data_from_text(image):
+    countries = []
+    for plate in getPlates(image):
+        countries += predict_country_from_plate(plate)
+    return countries
+
 class WrongFileExtension(Exception):
     pass
 

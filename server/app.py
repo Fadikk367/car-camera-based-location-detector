@@ -18,6 +18,7 @@ weights = {
 def predict():
     if request.method == 'GET':
         return upload_form
+
     data = {
         'countries': {},
         'markers': []
@@ -28,9 +29,10 @@ def predict():
     except WrongFileExtension:
         return {'message': 'Wrong file extension'}, 400
 
-    
     for country in extract_data_from_plates(image):
         data['countries'][country] = weights['plate']
+
+    
 
     # kierunek jazdy -> lista krajów
     # text extraktor -> lista krajów z prawdopodobieństwami i lista stringów
