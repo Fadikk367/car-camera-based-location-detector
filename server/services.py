@@ -5,7 +5,7 @@ import cv2
 from .extractors.plates.plate_analyzer import predict_country_from_plate
 from .extractors.plates.plate_detector import getPlates
 
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'yaml'}
+ALLOWED_EXTENSIONS = {'mp4'}
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -23,11 +23,21 @@ def get_file_from_request():
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        path = os.path.join('images', filename)
-        file.save(path)
-        return cv2.imread(path)
+        video_path = os.path.join('images', filename)
+        file.save(video_path)
+        return video_path
     else:
         raise WrongFileExtension()
+
+def get_frames_from_video(video_path):
+    reader = cv2.VideoCapture(video_path)
+    is_next_frame, frame = reader.read()
+    frames = []
+    while is_next_frame:
+        frames.append(frame)
+        is_next_frame, frame = reader.read()
+    reader.release()
+    return frames
 
 def extract_data_from_plates(image):
     countries = []

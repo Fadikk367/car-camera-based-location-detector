@@ -25,14 +25,15 @@ def predict():
     }
 
     try:
-        image = get_file_from_request()
+        video_path = get_file_from_request()
     except WrongFileExtension:
         return {'message': 'Wrong file extension'}, 400
 
-    for country in extract_data_from_plates(image):
-        data['countries'][country] = weights['plate']
+    frames = get_frames_from_video(video_path)
 
-    
+    # for country in extract_data_from_plates(image):
+        # data['countries'][country] = weights['plate']
+
 
     # kierunek jazdy -> lista krajów
     # text extraktor -> lista krajów z prawdopodobieństwami i lista stringów
