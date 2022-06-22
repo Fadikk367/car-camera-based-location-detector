@@ -92,12 +92,18 @@ var mapState = {
   }
 
   function getMarkersForPlaces(places) {
-    return places.map(({point, name}) => {
+    const markers = [];
+    places.forEach((place) => {
+        if (!place) return;
+
+        const {point, name} = place;
         const marker = L.marker([point.lat, point.lng]);
         marker.bindPopup(name);
 
-        return marker
-    })
+        markers.push(marker);
+    });
+
+    return markers;
   }
 
   function getCountriesContours(countryCodes) {

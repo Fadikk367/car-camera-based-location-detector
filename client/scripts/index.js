@@ -68,10 +68,8 @@ function handleFormSubmit(e) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log({data});
+        handleResponse(data.result);
     });
-  
-    handleResponse(response);
   }
 }
 
