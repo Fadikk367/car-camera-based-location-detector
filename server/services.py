@@ -8,7 +8,7 @@ from .extractors.plates.plate_analyzer import predict_country_from_plate
 from .extractors.plates.plate_detector import getPlates
 from .extractors.traffic_side_extractor.traffic_side_extractor import traffic_side_extractor
 
-ALLOWED_EXTENSIONS = {'mp4'}
+ALLOWED_EXTENSIONS = {'mp4', 'mov'}
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -53,15 +53,15 @@ def extract_data_from_plates(image):
 
 def extract_data_from_text(image):
     countries = {}
-    words = []
+    words = set()
     for model_result in extract_all(image):
         languages = model_result[0]
         for language in languages:
             countries[language.lang] = language.prob
         model_words = model_result[1]
         for word in model_words:
-            if len(word) > 3:
-                words.append(word)
+            if len(word) > 3 and not word.isdigit():
+                words.add(word)
     return countries, words
 
 def extract_data_from_route(image):
