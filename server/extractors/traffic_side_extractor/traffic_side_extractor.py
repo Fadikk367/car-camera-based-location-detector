@@ -16,7 +16,7 @@ def get_traffic_side_lists():
     left_side_list = []
     right_side_list = []
     
-    with open("traffic_rules.csv") as csv_file:
+    with open("extractors/traffic_side_extractor/traffic_rules.csv") as csv_file:
         reader = csv.reader(csv_file, delimiter=",")
         counter = 1
         for line in reader:
@@ -26,9 +26,9 @@ def get_traffic_side_lists():
                 continue
             else:
                 if line[2] == 'YES':
-                    right_side_list.append(line[0])
+                    right_side_list.append(line[0].lower())
                 else:
-                    left_side_list.append(line[0])
+                    left_side_list.append(line[0].lower())
 
     return left_side_list, right_side_list
 
@@ -56,17 +56,18 @@ def get_probability(img,lines):
     global_count = 0
     total_count = 0
 
-    for line in lines:
-        for x1,y1,x2,y2 in line:
-            total_count += 1
-            local_count = get_left_right_recognition(x1, image.shape[1])
-            if y2 > y1:
-                local_count = get_left_right_recognition(x2, image.shape[1])
+    if lines is not None:
+        for line in lines:
+            for x1,y1,x2,y2 in line:
+                total_count += 1
+                local_count = get_left_right_recognition(x1, image.shape[1])
+                if y2 > y1:
+                    local_count = get_left_right_recognition(x2, image.shape[1])
 
-            cv2.line(blank_image,(x1,y1),(x2,y2),(0,255,0),thickness=3)
-            imge = cv2.addWeighted(imge,0.8,blank_image,1,0.0)
-            
-            global_count += local_count
+                cv2.line(blank_image,(x1,y1),(x2,y2),(0,255,0),thickness=3)
+                imge = cv2.addWeighted(imge,0.8,blank_image,1,0.0)
+                
+                global_count += local_count
             
     
     # return percantage of right-like lanes
@@ -92,12 +93,8 @@ def traffic_side_extractor(frame):
     # uncomment for testing
     # cv2.imshow("Test", image)
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-
     return more_likely_countries, probability
 
-if __name__ == '__main__':
-    image=cv2.imread('test_images/example_image_right_side.jpg')
-    countries, probability = traffic_side_extractor(frame=image)
+# if __name__ == '__main__':
+#     image=cv2.imread('test_images/example_image_right_side.jpg')
+#     countries, probability = traffic_side_extractor(frame=image)

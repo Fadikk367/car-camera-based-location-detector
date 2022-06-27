@@ -6,7 +6,7 @@ from imutils.object_detection import non_max_suppression
 from langdetect import detect_langs
 from easyocr import Reader
 
-model = "model/frozen_east_text_detection.pb"
+model = "extractors/text_extractor/model/frozen_east_text_detection.pb"
 STANDARD_WIDTH = 320
 STANDARD_HEIGHT = 320
 CONF_THRESHOLD = 0.01
