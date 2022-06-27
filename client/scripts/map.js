@@ -62,10 +62,19 @@ var mapState = {
     markers: [],
 };
 
+function filterCountries(countries) {
+    const entries = Object.entries(countries).filter(([_, probability]) => {
+        if (probability < 0.2) return false;
+        return true;
+    });
+
+    return Object.fromEntries(entries)
+}
 
   function handleResponse(response) {
-    mapState.probabilitiesByCountry = getProbabilitiesByCountryNames(response.countries);
-    const countryContours = getCountriesContours(response.countries);
+    const filteredCountries = filterCountries(response.countries)
+    mapState.probabilitiesByCountry = getProbabilitiesByCountryNames(filteredCountries);
+    const countryContours = getCountriesContours(filteredCountries);
     const markers = getMarkersForPlaces(response.markers);
 
     const countours = L.geoJson(countryContours, {style}).addTo(map);
