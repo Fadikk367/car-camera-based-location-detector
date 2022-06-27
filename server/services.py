@@ -34,14 +34,18 @@ def get_frames_from_video(video_path):
     reader = cv2.VideoCapture(video_path)
     is_next_frame, frame = reader.read()
     all_frames = []
-    i = 0
+    number_of_frames = 0
     while is_next_frame:
-        i += 1
+        number_of_frames += 1
         all_frames.append(frame)
         is_next_frame, frame = reader.read()
     reader.release()
-    div = i//int(request.form['frames']) + 1
-    frames = [frame for index, frame in enumerate(all_frames) if index%div == 0]
+    # div = number_of_frames//int(request.form['frames']) + 1
+    # frames = [frame for index, frame in enumerate(all_frames) if index%div == 0]
+    frame_index = int(request.form['video_time']/request.form['video_length'] * number_of_frames)
+    if frame_index >= number_of_frames:
+        frame_index = number_of_frames - 1
+    frames = [all_frames[frame_index]]
     print(f'Result number of frames: {len(frames)}')
     return frames
 
@@ -89,6 +93,7 @@ upload_form = '''
     <form method=post enctype=multipart/form-data>
       <input type=file name=file>
       <input type=submit value=Upload>
-      <input type=number name=frames>
+      <input type=number name=video_time>
+      <input type=number name=video_length>
     </form>
     '''
