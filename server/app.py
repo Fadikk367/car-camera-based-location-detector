@@ -51,6 +51,8 @@ def predict():
 
         for word in words:
             print(f'Chcecking word: {word}')
-            data['markers'].append(get_cities_from_string(word))
+            new_marker = get_cities_from_string(word)
+            if new_marker is not None:
+                data['markers'].append()
 
     return {'result': data}, 200
