@@ -42,7 +42,7 @@ def get_frames_from_video(video_path):
     reader.release()
     # div = number_of_frames//int(request.form['frames']) + 1
     # frames = [frame for index, frame in enumerate(all_frames) if index%div == 0]
-    frame_index = int(request.form['video_time']/request.form['video_length'] * number_of_frames)
+    frame_index = int(float(request.form['video_time'])/float(request.form['video_length']) * number_of_frames)
     if frame_index >= number_of_frames:
         frame_index = number_of_frames - 1
     frames = [all_frames[frame_index]]
@@ -64,7 +64,7 @@ def extract_data_from_text(image):
             countries[language.lang] = language.prob
         model_words = model_result[1]
         for word in model_words:
-            if len(word) > 3 and not word.isdigit():
+            if len(word) > 3 and not any(char.isdigit() for char in word):
                 words.add(word)
     return countries, words
 
@@ -73,9 +73,13 @@ def extract_data_from_route(image):
 
 def get_cities_from_string(string):
     response = requests.get(f'https://graphhopper.com/api/1/geocode?q={string}&debug=true&key=9b5dc8fa-e030-418a-8011-17472be5b1bb').json()
-    hits = response['hits']
-    if len(hits) > 0:
-        return {'point': hits[0]['point'], 'name': hits[0]['name']}
+
+    try:
+        hits = response['hits']
+        if len(hits) > 0:
+            return {'point': hits[0]['point'], 'name': hits[0]['name']}
+    except Exception:
+        pass
 
 class WrongFileExtension(Exception):
     pass

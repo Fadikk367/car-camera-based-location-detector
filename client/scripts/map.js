@@ -64,7 +64,7 @@ var mapState = {
 
 function filterCountries(countries) {
     const entries = Object.entries(countries).filter(([_, probability]) => {
-        if (probability < 0.2) return false;
+        if (probability < 0.1) return false;
         return true;
     });
 

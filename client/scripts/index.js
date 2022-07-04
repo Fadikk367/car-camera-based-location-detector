@@ -1,5 +1,5 @@
 const videoInput = document.getElementById('video-input');
-const framesInput = document.getElementById('frames-input');
+// const framesInput = document.getElementById('frames-input');
 const videoPlayer = document.getElementById('video-player');
 const clearVideoButton = document.getElementById('clear-video-button');
 const uploadVideoButton = document.getElementById('upload-video-button');
@@ -60,7 +60,8 @@ function handleFormSubmit(e) {
   if (file) {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('frames', framesInput.value);
+    formData.append('video_length', videoPlayer.duration);
+    formData.append('video_time', videoPlayer.currentTime);
   
     fetch('http://localhost:5000', {
       method: 'POST',

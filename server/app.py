@@ -53,6 +53,6 @@ def predict():
             print(f'Chcecking word: {word}')
             new_marker = get_cities_from_string(word)
             if new_marker is not None:
-                data['markers'].append()
+                data['markers'].append(new_marker)
 
     return {'result': data}, 200
