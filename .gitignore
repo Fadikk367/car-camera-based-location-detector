@@ -1,1 +1,8 @@
 __pycache__/
+server/images/*
+client_copy/
+server/aipo-env/
+*/**/__pycache__/*
+client/node_modules/
+client/.parcel-cache/
+client/dist/

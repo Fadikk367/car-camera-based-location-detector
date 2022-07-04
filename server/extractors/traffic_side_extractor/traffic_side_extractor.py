@@ -60,9 +60,9 @@ def get_probability(img,lines):
         for line in lines:
             for x1,y1,x2,y2 in line:
                 total_count += 1
-                local_count = get_left_right_recognition(x1, image.shape[1])
+                local_count = get_left_right_recognition(x1, imge.shape[1])
                 if y2 > y1:
-                    local_count = get_left_right_recognition(x2, image.shape[1])
+                    local_count = get_left_right_recognition(x2, imge.shape[1])
 
                 cv2.line(blank_image,(x1,y1),(x2,y2),(0,255,0),thickness=3)
                 imge = cv2.addWeighted(imge,0.8,blank_image,1,0.0)
