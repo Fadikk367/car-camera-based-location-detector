@@ -26,3 +26,26 @@ Server running at http://localhost:1234
 ✨ Built in 50ms
 ```
 
+## Running backend locally:
+
+Navigate to frontent directory:
+```bash
+cd server
+```
+
+(recommended) Create virtual environment:
+```bash
+python -m venv venv
+. ./venv/Scripts/activate
+```
+
+Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+Run dev server:
+```bash
+flask run
+```
+
