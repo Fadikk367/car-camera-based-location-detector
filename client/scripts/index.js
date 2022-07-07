@@ -69,6 +69,7 @@ function handleFormSubmit(e) {
     })
       .then(res => res.json())
       .then(data => {
+        resetFormAndClearMap();
         handleResponse(data.result);
     });
   }
